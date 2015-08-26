@@ -36,5 +36,6 @@ post('/recipes/:id') do
   @recipe = Recipe.find(params.fetch('id').to_i())
   description = params.fetch('description')
   @recipe.tags.create(:description => description)
-  redirect('/recipes/'.concat(@recipe.id().to_s()))
+  redirect("/recipes/#{@recipe.id()}")
+  # redirect('/recipes/'.concat(@recipe.id().to_s()))
 end
