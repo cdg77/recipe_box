@@ -13,6 +13,7 @@ end
 post('/tags') do
   description = params.fetch('description')
   @tag = Tag.create({:description => description})
+
   redirect('/')
 end
 
@@ -23,8 +24,17 @@ post('/recipes') do
 end
 
 get('/recipes/:id') do
+  @tags = Tag.all()
   @recipes = Recipe.all()
   @recipe = Recipe.find(params.fetch('id').to_i())
-  @tags = Tag.all()
   erb(:recipe)
+end
+
+post('/recipes/:id') do
+  @recipes = Recipe.all()
+  @tags = Tag.all()
+  @recipe = Recipe.find(params.fetch('id').to_i())
+  description = params.fetch('description')
+  @recipe.tags.create(:description => description)
+  redirect('/recipes/'.concat(@recipe.id().to_s()))
 end

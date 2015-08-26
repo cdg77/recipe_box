@@ -8,14 +8,14 @@
     <h3>Tag</h3>
     <ul> <% if @tags.any?() %>
           <% @tags.each do |tag| %>
-      <li><a href="/tags/<%= tag.id() %>"><%= tag.description() %></a></li>
+      <li class="panel-body"><a href="/tags/<%= tag.id() %>"><%= tag.description() %></a></li>
           <% end %>
           <% else %>
           <h5> There are no tags in your box. So sad. </h5>
     </ul>
       <% end %>
 
-    <div class="well">
+    <!-- <div class="well">
       <form class="form-horizontal" action= "/tags" method="post">
         <fieldset>
           <legend></legend>
@@ -28,7 +28,7 @@
           </div>
         </fieldset>
       </form>
-    </div>
+    </div> -->
 
     <h3>Recipes</h3>
     <ul>
