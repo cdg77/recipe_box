@@ -7,7 +7,7 @@ describe('the path of recipe_box', {:type => :feature}) do
   end
   it('lets you add a tag to the list of tags') do
     visit('/')
-    fill_in('description' :with => "Rustic")
+    fill_in('description', :with => "Rustic")
     click_button("Tag It")
     expect(page).to have_content('Rustic')
   end
