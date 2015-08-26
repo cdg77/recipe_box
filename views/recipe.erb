@@ -1,0 +1,12 @@
+<h3><%= @recipe.name() %>
+  <%if @recipe.tags.any?() %>
+    <% tags = recipe.tags() %>
+      <% tags.each() do |tag| %>
+      <%= tag.description() %>
+      <%end %>
+  <% else %>
+    <h5> Add tags to this recipe </h5>
+
+
+
+  <% end %>
