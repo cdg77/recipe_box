@@ -5,46 +5,46 @@
     </div>
   </div>
 
-    <h3>Tag</h3>
-    <ul> <% if @tags.any?() %>
-          <% @tags.each do |tag| %>
-      <li class="panel-body"><a href="/tags/<%= tag.id() %>"><%= tag.description() %></a></li>
-          <% end %>
-          <% else %>
-          <h5> There are no tags in your box. So sad. </h5>
-    </ul>
+    <h3>Tags</h3>
+    <div class='well'>
+      <ul> <% if @tags.any?() %>
+            <% @tags.each do |tag| %>
+        <li class=""><a href="/tags/<%= tag.id() %>"><%= tag.description() %></a></li>
+            <% end %>
+            <% else %>
+            <h5> No recipes have tags. So sad. </h5>
+      </ul>
+        <% end %>
+    </div>
+
+      <h3>Recipes</h3>
+      <ul>
+        <% if @recipes.any?() %>
+        <% @recipes.each do |recipe| %>
+
+        <table class="table table-striped table-hover ">
+          <tbody>
+            <tr class='info'>
+              <li>
+                <a href="/recipes/<%= recipe.id() %>"><%= recipe.name() %></a>
+                <form action="/recipes/<%= recipe.id() %>" method="post" >
+                  <input type="hidden"value="delete"  name="_method">
+                  <button class='btn btn-danger btn-xs' type='submit'>Toss It!</button>
+                </form>
+              </li>
+            </tr>
+          </tbody>
+        </table>
+
+        <% end %>
+
+        <% else %>
+
+        <h5>There are no recipes in your box. Go check out Jamie Oliver! </h5>
+
+      </ul>
       <% end %>
 
-    <!-- <div class="well">
-      <form class="form-horizontal" action= "/tags" method="post">
-        <fieldset>
-          <legend></legend>
-          <div class="form-group">
-            <label for="description" class="col-lg-2 control-label">Make your own!</label>
-            <div class="col-lg-10">
-              <input type="text" class="form-control" name="description" id="description" placeholder="ex: Rustic, Fall, Romance, Bromance">
-              <button name="button" class="btn btn-primary">Tag It</button>
-            </div>
-          </div>
-        </fieldset>
-      </form>
-    </div> -->
-
-    <h3>Recipes</h3>
-    <ul>
-      <% if @recipes.any?() %>
-      <% @recipes.each do |recipe| %>
-
-      <li><a href="/recipes/<%= recipe.id() %>"><%= recipe.name() %></a></li>
-
-      <% end %>
-
-      <% else %>
-
-      <h5>There are no recipes in your box. Go check out Jamie Oliver! </h5>
-
-    </ul>
-    <% end %>
 
 
     <div class='well'>

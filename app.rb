@@ -39,3 +39,19 @@ post('/recipes/:id') do
   redirect("/recipes/#{@recipe.id()}")
   # redirect('/recipes/'.concat(@recipe.id().to_s()))
 end
+
+patch('/recipes/:id') do
+  @recipes = Recipe.all()
+  @recipe = Recipe.find(params.fetch('id').to_i())
+  name =  params.fetch('name')
+  @recipe.update({:name => name})
+  redirect("/recipes/#{@recipe.id()}")
+end
+
+delete("/recipes/:id") do
+  @recipes = Recipe.all()
+  @recipe = Recipe.find(params.fetch('id').to_i())
+  @recipe.destroy()
+
+  redirect('/')
+end
