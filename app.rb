@@ -25,6 +25,7 @@ end
 
 get('/recipes/:id') do
   @tags = Tag.all()
+  @websites = Website.all()
   @recipes = Recipe.all()
   @recipe = Recipe.find(params.fetch('id').to_i())
   erb(:recipe)
@@ -36,6 +37,9 @@ post('/recipes/:id') do
   @recipe = Recipe.find(params.fetch('id').to_i())
   description = params.fetch('description')
   @recipe.tags.create(:description => description)
+  @websites = Website.all()
+  address = params.fetch('address')
+  @recipe.websites.create(:address => address)
   redirect("/recipes/#{@recipe.id()}")
   # redirect('/recipes/'.concat(@recipe.id().to_s()))
 end
@@ -46,6 +50,7 @@ patch('/recipes/:id') do
   name =  params.fetch('name')
   @recipe.update({:name => name})
   redirect("/recipes/#{@recipe.id()}")
+
 end
 
 delete("/recipes/:id") do
@@ -96,3 +101,5 @@ patch('/tags/:id') do
   @tag.update({:description => description})
   redirect("/tags/#{@tag.id()}")
 end
+
+######

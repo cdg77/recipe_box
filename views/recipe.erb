@@ -37,6 +37,23 @@
         <button type="submit">Fix it</button>
       </form>
 
+    
+      <div class="well">
+        <form class="form-horizontal" action= "/recipes/<%= @recipe.id() %>" method="post">
+          <fieldset>
+            <legend></legend>
+            <div class="form-group">
+              <label for="description" class="col-lg-2 control-label">Make your own!</label>
+              <div class="col-lg-10">
+                <input type="text" class="form-control" name="address" id="address" placeholder="ex: Rustic, Fall, Romance, Bromance">
+                <button name="button" class="btn btn-primary">Web It!</button>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+
+
 
     <a href="/">Return to Home</a>
 </div>

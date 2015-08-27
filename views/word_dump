@@ -20,3 +20,20 @@
 <input name="name" type="text">
 <button type="submit">Fix it</button>
 </form> -->
+
+
+  <!-- #######
+
+
+      <%if @recipe.websites.any?() %>
+      <% websites = @recipe.websites() %>
+      <% websites.each() do |website| %>
+      <%= website.address() %>
+      <form action="/recipes/<%= @recipe.id() %>/websites/<%= website_id() %>" method="post" >
+        <input type="hidden" value="delete"  name="_method">
+        <button class='btn btn-warning btn-xs' type='submit'>Unlink</button>
+      </form>
+      <%end %>
+      <% else %>
+      <h5> Add recipe websites to this recipe </h5>
+      <% end %> -->
