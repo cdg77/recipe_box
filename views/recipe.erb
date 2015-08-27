@@ -1,34 +1,42 @@
-<h3><%= @recipe.name() %></h3>
-  <%if @recipe.tags.any?() %>
-    <% tags = @recipe.tags() %>
-      <% tags.each() do |tag| %>
-      <%= tag.description() %>
-      <%end %>
-  <% else %>
-    <h5> Add tags to this recipe </h5>
-  <% end %>
+<div class="container-fluid">
 
-    <div class="well">
-      <form class="form-horizontal" action= "/recipes/<%= @recipe.id() %>" method="post">
-        <fieldset>
-          <legend></legend>
-          <div class="form-group">
-            <label for="description" class="col-lg-2 control-label">Make your own!</label>
-            <div class="col-lg-10">
-              <input type="text" class="form-control" name="description" id="description" placeholder="ex: Rustic, Fall, Romance, Bromance">
-              <button name="button" class="btn btn-primary">Tag It</button>
+
+  <h3><%= @recipe.name() %></h3>
+    <%if @recipe.tags.any?() %>
+      <% tags = @recipe.tags() %>
+        <% tags.each() do |tag| %>
+        <%= tag.description() %>
+          <form action="/recipes/<%= @recipe.id() %>/tags/<%= tag.id() %>" method="post" >
+            <input type="hidden" value="delete"  name="_method">
+            <button class='btn btn-warning btn-xs' type='submit'>Untag!</button>
+          </form>
+        <%end %>
+    <% else %>
+      <h5> Add tags to this recipe </h5>
+    <% end %>
+
+      <div class="well">
+        <form class="form-horizontal" action= "/recipes/<%= @recipe.id() %>" method="post">
+          <fieldset>
+            <legend></legend>
+            <div class="form-group">
+              <label for="description" class="col-lg-2 control-label">Make your own!</label>
+              <div class="col-lg-10">
+                <input type="text" class="form-control" name="description" id="description" placeholder="ex: Rustic, Fall, Romance, Bromance">
+                <button name="button" class="btn btn-primary">Tag It</button>
+              </div>
             </div>
-          </div>
-        </fieldset>
+          </fieldset>
+        </form>
+      </div>
+
+      <form  action="/recipes/<%= @recipe.id() %>" method="post">
+        <input name="_method" type="hidden" value="patch">
+        <label for="name">Edit this Recipe:</label>
+        <input name="name" type="text">
+        <button type="submit">Fix it</button>
       </form>
-    </div>
-
-    <form  action="/recipes/<%= @recipe.id() %>" method="post">
-      <input name="_method" type="hidden" value="patch">
-      <label for="name">Edit this Recipe:</label>
-      <input name="name" type="text">
-      <button type="submit">Fix it</button>
-    </form>
 
 
-  <a href="/">Return to Home</a>
+    <a href="/">Return to Home</a>
+</div>

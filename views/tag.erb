@@ -1,0 +1,46 @@
+<div class="container-fluid">
+
+
+  <h3><%= @tag.description() %></h3>
+  <%if @tag.recipes.any?() %>
+  <% recipes = @tag.recipes() %>
+  <% recipes.each() do |recipe| %>
+  <%= recipe.name() %>
+  <form action="/tags/<%= @tag.id() %>/recipes/<%= recipe.id() %>" method="post" >
+    <input type="hidden" value="delete"  name="_method">
+    <button class='btn btn-warning btn-xs' type='submit'>Remove recipe.</button>
+  </form>
+  <%end %>
+  <% else %>
+  <h5> Add recipes to this tag </h5>
+  <% end %>
+
+
+
+
+  <div class="well">
+    <form class="form-horizontal" action= "/tags/<%= @tag.id() %>" method="post">
+      <fieldset>
+        <legend></legend>
+        <div class="form-group">
+          <label for="name" class="col-lg-2 control-label">Make your own!</label>
+          <div class="col-lg-10">
+            <input type="text" class="form-control" name="name" id="name" placeholder="ex: Chocolate Babka, Pumpkin Pie">
+            <button name="button" class="btn btn-primary">Dish it!</button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+
+  <form  action="/tags/<%= @tag.id() %>" method="post">
+    <input name="_method" type="hidden" value="patch">
+    <label for="description">Edit this Tag:</label>
+    <input name="description" type="text">
+    <button type="submit">Fix it</button>
+  </form>
+
+
+
+  <a href="/">Return to Home</a>
+</div>

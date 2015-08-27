@@ -52,6 +52,47 @@ delete("/recipes/:id") do
   @recipes = Recipe.all()
   @recipe = Recipe.find(params.fetch('id').to_i())
   @recipe.destroy()
-
   redirect('/')
+end
+
+delete("/recipes/:id/tags/:tag_id") do
+  @recipes = Recipe.all()
+  @recipe = Recipe.find(params.fetch('id').to_i())
+  @tags = Tag.all()
+  @tag = Tag.find(params.fetch('tag_id').to_i())
+  @tag.destroy()
+  redirect("/recipes/#{@recipe.id()}")
+end
+
+get("/tags/:id") do
+@tags = Tag.all()
+@tag = Tag.find(params.fetch('id').to_i())
+@recipes = Recipe.all()
+erb(:tag)
+end
+
+post('/tags/:id') do
+  @tags = Tag.all()
+  @recipes = Recipe.all()
+  @tag = Tag.find(params.fetch('id').to_i())
+  name = params.fetch('name')
+  @tag.recipes.create(:name => name)
+  redirect("/tags/#{@tag.id()}")
+end
+
+delete("/tags/:id/recipes/:recipe_id") do
+  @tags = Tag.all()
+  @tag = Tag.find(params.fetch('id').to_i())
+  @recipes = Recipe.all()
+  @recipe = Recipe.find(params.fetch('recipe_id').to_i())
+  @recipe.destroy()
+  redirect("/tags/#{@tag.id()}")
+end
+
+patch('/tags/:id') do
+  @tags =Tag.all()
+  @tag =Tag.find(params.fetch('id').to_i())
+  description =  params.fetch('description')
+  @tag.update({:description => description})
+  redirect("/tags/#{@tag.id()}")
 end
